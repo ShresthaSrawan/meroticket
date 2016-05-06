@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompanyTable extends Migration {
+class CreateOwnersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateCompanyTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('owner', function($table){
+        Schema::create('owners', function($table){
             $table->increments('id');
-            $table->string('companyname');
-            $table->string('ownername');
+            $table->string('company');
+            $table->string('name');
             $table->string('contact_number');
             $table->string('address');
             $table->timestamps();
@@ -29,7 +29,7 @@ class CreateCompanyTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('owner');
+        Schema::drop('owners');
 	}
 
 }

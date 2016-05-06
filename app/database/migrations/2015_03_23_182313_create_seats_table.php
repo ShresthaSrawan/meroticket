@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSeatTable extends Migration {
+class CreateSeatsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSeatTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('seat', function(Blueprint $table)
+		Schema::create('seats', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->integer('fs');
@@ -20,7 +20,9 @@ class CreateSeatTable extends Migration {
             $table->integer('b');
             $table->integer('bs');
             $table->integer('bus_id')->unsigned();
-            $table->foreign('bus_id')->references('id')->on('bus');
+            $table->foreign('bus_id')
+				->references('id')
+				->on('buses');
 			$table->timestamps();
 		});
 	}
@@ -32,10 +34,10 @@ class CreateSeatTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::table('seat', function($table){
-            $table->dropForeign('seat_bus_id_foreign');
+        Schema::table('seats', function($table){
+            $table->dropForeign('seats_bus_id_foreign');
         });
-		Schema::drop('seat');
+		Schema::drop('seats');
 	}
 
 }

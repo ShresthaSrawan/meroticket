@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountTable extends Migration {
+class CreateDiscountsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,17 @@ class CreateDiscountTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('discount', function(Blueprint $table)
+		Schema::create('discounts', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->integer('bus_id')->unsigned();
             $table->integer('student');
             $table->integer('kids');
             $table->integer('old');
-            $table->foreign('bus_id')->references('id')->on('bus');
+			$table->integer('other');
+            $table->foreign('bus_id')
+				->references('id')
+				->on('buses');
 			$table->timestamps();
 		});
 	}
@@ -31,11 +34,11 @@ class CreateDiscountTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::table('discount', function($table){
-            $table->dropForeign('discount_bus_id_foreign');
+        Schema::table('discounts', function($table){
+            $table->dropForeign('discounts_bus_id_foreign');
         });
 
-		Schema::drop('discount');
+		Schema::drop('discounts');
 	}
 
 }

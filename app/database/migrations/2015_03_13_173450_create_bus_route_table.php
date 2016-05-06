@@ -18,8 +18,12 @@ class CreateBusRouteTable extends Migration {
             $table->integer('bus_id')->unsigned();
             $table->integer('route_id')->unsigned();
             $table->date('date');
-            $table->foreign('bus_id')->references('id')->on('bus');
-            $table->foreign('route_id')->references('id')->on('route');
+            $table->foreign('bus_id')
+				->references('id')
+				->on('buses');
+            $table->foreign('route_id')
+				->references('id')
+				->on('routes');
 			$table->timestamps();
 		});
 	}

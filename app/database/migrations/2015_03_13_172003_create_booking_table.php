@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingTable extends Migration {
+class CreateBookingsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateBookingTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('booking', function(Blueprint $table)
+		Schema::create('bookings', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->integer('user_id')->unsigned();
@@ -20,7 +20,7 @@ class CreateBookingTable extends Migration {
             $table->time('remaining_time');
             $table->string('status');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('bus_id')->references('id')->on('bus');
+            $table->foreign('bus_id')->references('id')->on('buses');
 			$table->timestamps();
 		});
 	}
@@ -32,12 +32,12 @@ class CreateBookingTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::table('booking', function($table){
-            $table->dropForeign('booking_user_id_foreign');
-            $table->dropForeign('booking_bus_id_foreign');
+        Schema::table('bookings', function($table){
+            $table->dropForeign('bookings_user_id_foreign');
+            $table->dropForeign('bookings_bus_id_foreign');
         });
 
-		Schema::drop('booking');
+		Schema::drop('bookings');
 	}
 
 }
