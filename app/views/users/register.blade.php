@@ -17,9 +17,9 @@ Mero Ticket | Register
 
     <div class="row" data-gutter="60">
         <div class="col-md-4">
-            <h3>Welcome to Traveler</h3>
+            <h3>Welcome to Mero Ticket</h3>
             <p>Ultricies vestibulum egestas ad cras mollis nam dictumst netus leo facilisis justo maecenas molestie ipsum felis mus cubilia hendrerit vestibulum accumsan consectetur convallis vitae nec sapien diam justo lobortis aenean</p>
-            <p>Lobortis tristique interdum curae luctus mattis nisl aenean diam suscipit</p>
+            <p>If you already have account then you can login <a href="{{route('login')}}">here</a>.</p>
         </div>
         <div class="col-md-4">
             <h3>New To Mero Ticket?</h3>
@@ -36,6 +36,13 @@ Mero Ticket | Register
                     <input name="lastname" class="form-control" placeholder="e.g. Yogi" type="text"
                            value="{{Input::old('lastname')}}"/>
                     <span class="error-display"><i style='color: red;'>  {{$errors->first('lastname')}}</i></span>
+                </div>
+
+                <div class="form-group form-group-icon-left"><i class="fa fa-user input-icon input-icon-show"></i>
+                    <label>User Name</label>
+                    <input name="username" class="form-control" placeholder="e.g. surajyogi123" type="text"
+                           value="{{Input::old('username')}}"/>
+                    <span class="error-display"><i style='color: red;'>  {{$errors->first('username')}}</i></span>
                 </div>
 
                 <div class="form-group form-group-icon-left"><i class="fa fa-envelope input-icon input-icon-show"></i>

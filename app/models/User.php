@@ -26,6 +26,7 @@ class User extends Base_Model implements UserInterface, RemindableInterface {
     public static $rules = array(
         'firstname'=>'required|alpha|min:2',
         'lastname'=>'required|alpha|min:2',
+        'username'=>'required|alpha_dash|unique:users|min:2',
         'email'=>'required|email|unique:users',
         'password'=>'required|alpha_num|between:6,12|confirmed',
         'password_confirmation'=>'required|alpha_num|between:6,12'
@@ -35,8 +36,39 @@ class User extends Base_Model implements UserInterface, RemindableInterface {
         'email.required' => 'Mero Ticket requires your email address',
         'firstname.required' => 'Please provide your first name to Mero Ticket',
         'lastname.required' => 'Please provide your full last name to Mero Ticket',
+        'username.required' => 'Please provide your username to Mero Ticket',
+        'username.unique' => 'The username is already taken. Pleas enter a different username.',
         'password.required' => 'You have to set a password',
-        'password_confirmation.required' => 'Oops! Two password did not match'
+        'password.confirmed' => 'Oops! Two password did not match',
+        'password_confirmation.required' => 'Please provide you password confirmation'
     );
+
+    public static function getAllBooking(){
+        
+        $results = DB::table('booking')
+            ->join('booking_details', 'booking.booking_details_id','=','booking_details.id')
+            ->join('route', 'route.id','=', 'booking_details.route_id')
+            ->where('booking.user_id','=', Auth::user()->get()->id)
+            ->select('booking.id AS bookingid', 'route.from', 'route.to', 'booking.total_passenger', 'total_price', 'booking.date')
+            ->get();
+
+        if($results){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
+    public static function getUserDetails(){
+        $id = Auth::user()->get()->id;
+
+        $results = DB::table('users')->where('id','=', $id)->select('id', 'firstName', 'lastName', 'userName', 'email')->get();
+        
+        if($results){
+            return $results;
+        }else{
+            return false;
+        }
+    }
 
 }

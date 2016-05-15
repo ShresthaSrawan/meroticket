@@ -54,6 +54,50 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('admin', function()
+{
+	if (Auth::admin()->guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::route('login');
+		}
+	}
+});
+Route::filter('owner', function()
+{
+
+	if (Auth::owner()->guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::route('login');
+		}
+	}
+});
+Route::filter('users', function()
+{
+
+	if (Auth::user()->guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::route('login');
+		}
+	}
+});
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -67,7 +111,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::woner()->check()) return Redirect::to('/');
 });
 
 /*

@@ -14,10 +14,14 @@ class CreateOwnersTable extends Migration {
 	{
         Schema::create('owners', function($table){
             $table->increments('id');
-            $table->string('company');
-            $table->string('name');
+            $table->string('companyname');
+            $table->string('ownername');
+            $table->string('email');
+            $table->text('password');
             $table->string('contact_number');
             $table->string('address');
+            $table->boolean('status')->default('1');
+            $table->string('remember_token', 100);
             $table->timestamps();
         });
 	}
