@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class CreateLuggageTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::create('luggage_types', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('email')->index();
-            $table->string('token')->index();
-            $table->timestamp('created_at');
+            $table->increments('id');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->float('price');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('password_resets');
+        Schema::drop('luggage_types');
     }
 }
